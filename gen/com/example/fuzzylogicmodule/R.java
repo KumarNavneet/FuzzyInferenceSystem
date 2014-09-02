@@ -45,17 +45,34 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int Back_FISEditor=0x7f090001;
         public static final int DelInput=0x7f090006;
         public static final int DelOutput=0x7f090008;
+        public static final int FIS=0x7f090014;
+        public static final int FISRL=0x7f090013;
+        public static final int InputAdd=0x7f09000d;
+        public static final int InputDel=0x7f09000e;
+        public static final int InputRL=0x7f09000b;
+        public static final int InputlistView=0x7f09000c;
+        public static final int MethodsRL=0x7f090015;
         public static final int Next_FISEditor=0x7f090000;
         public static final int Notif_FISEditor=0x7f090002;
-        public static final int action_settings=0x7f09000b;
-        public static final int fullscreen_content_controls=0x7f09000a;
+        public static final int OutputAdd=0x7f090011;
+        public static final int OutputDel=0x7f090012;
+        public static final int OutputRL=0x7f09000f;
+        public static final int OutputlistView=0x7f090010;
+        public static final int Sample=0x7f090018;
+        public static final int action_settings=0x7f09001a;
+        public static final int firstRL=0x7f09000a;
+        public static final int fullscreen_content_controls=0x7f090017;
+        public static final int parent_relative_layout=0x7f090009;
+        public static final int sample=0x7f090019;
         public static final int scrollView1=0x7f090003;
         public static final int scrollView2=0x7f090004;
-        public static final int splashView=0x7f090009;
+        public static final int splashView=0x7f090016;
     }
     public static final class layout {
         public static final int activity_fis__editor=0x7f030000;
-        public static final int activity_splash=0x7f030001;
+        public static final int activity_fis__editor_gyani=0x7f030001;
+        public static final int activity_splash=0x7f030002;
+        public static final int listviewelement=0x7f030003;
     }
     public static final class menu {
         public static final int fis__editor=0x7f080000;

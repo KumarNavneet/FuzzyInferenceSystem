@@ -13,31 +13,31 @@ public class Variable {
 		this.upperLimit = ul;
 	}
 	
-	String getVariableName(){
+	public String getVariableName(){
 		return this.name;
 	}
-	void setVariableName(String name){
+	public void setVariableName(String name){
 		this.name = name;
 	}
 	
-	int getVariableType(){
+	public int getVariableType(){
 		return this.type;
 	}
-	void setVariableType(int t){
+	public void setVariableType(int t){
 		this.type = t;
 	}
 	
-	int getLowerLimit(){
+	public int getLowerLimit(){
 		return this.lowerLimit;
 	}
-	void setLowerLimit(int l){
+	public void setLowerLimit(int l){
 		this.lowerLimit = l;
  	}
 	
-	int getUpperLimit(){
+	public int getUpperLimit(){
 		return this.upperLimit;
 	}
-	void setUpperLimit(int u){
+	public void setUpperLimit(int u){
 		this.upperLimit = u;
 	}
 //	public boolean equals(Object obj) {
