@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -32,11 +33,11 @@ public class FIS_Editor extends Activity {
     ListView InputListView = null;
     ListView OutputListView = null;
     TextView Notif = null;
-    
+    ListView MethodlistView = null;
     FIS_System mFIS_System = null;
     ArrayList<Variable> Inputs = null;
     ArrayList<Variable> Outputs = null;
-    
+    String [] methodValueTexts = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,21 +65,42 @@ public class FIS_Editor extends Activity {
         //Populate the Input and Outptut ListViews by default vars.
         InputListView = (ListView)findViewById(R.id.InputlistView);        
         OutputListView = (ListView)findViewById(R.id.OutputlistView);
-        final List<String> InputButtons = new ArrayList<>();
-        final List<String> OutputButtons = new ArrayList<>();
+        final List<String> InputButtons = new ArrayList<String>();
+        final List<String> OutputButtons = new ArrayList<String>();
         for(Variable var : Inputs){
             InputButtons.add(var.getVariableName());
         }
-        final ArrayAdapter<String> inputListAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, InputButtons);
+        final ArrayAdapter<String> inputListAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, InputButtons);
         InputListView.setAdapter(inputListAdapter);
         InputListView.setBackgroundColor(Color.GRAY);
         
         for(Variable var : Outputs){
             OutputButtons.add(var.getVariableName());
         }
-        final ArrayAdapter<String> outputListAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, OutputButtons);
+        final ArrayAdapter<String> outputListAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, OutputButtons);
         OutputListView.setAdapter(outputListAdapter);
         OutputListView.setBackgroundColor(Color.GRAY);
+        
+        InputListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				
+				
+			}
+		});
+        OutputListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				
+				
+			}
+		});
         
         InputAdd.setOnClickListener(new OnClickListener() {
             
@@ -87,12 +109,7 @@ public class FIS_Editor extends Activity {
                 // TODO Auto-generated method stub
                 Variable TempInput = new Variable("Default Input ", 1, 0, 1);
                 Inputs.add(TempInput);
-//                Log.d("Navneet",  "The length of Inputs is "+Inputs.size());
-//                Toast.makeText(getApplicationContext(), "The length of Inputs is "+Inputs.size(), Toast.LENGTH_LONG).show();
                 InputButtons.add(TempInput.getVariableName());
-//                for(Variable var : Inputs){
-//                    InputButtons.add(var.getVariableName());
-//                }
                 inputListAdapter.notifyDataSetChanged();
             }
         });
@@ -104,9 +121,6 @@ public class FIS_Editor extends Activity {
                 Variable TempOutput = new Variable("Default Output ", 1, 0, 1);
                 Outputs.add(TempOutput);
                 OutputButtons.add(TempOutput.getVariableName());
-//                for(Variable var : Outputs){
-//                    OutputButtons.add(var.getVariableName());
-//                }
                 outputListAdapter.notifyDataSetChanged();
             }
         });
@@ -143,7 +157,10 @@ public class FIS_Editor extends Activity {
         });
         //back.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         
-        
+        MethodlistView = (ListView)findViewById(R.id.MethodlistView);
+        methodValueTexts = new String[] {"And", "Or", "Aggregate", "Implication", "DefuzzyFication"};
+        MethodRowAdapter mMethodAdapter = new MethodRowAdapter(getApplicationContext(), methodValueTexts);
+        MethodlistView.setAdapter(mMethodAdapter);
     }    
 
     @Override

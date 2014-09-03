@@ -20,7 +20,10 @@
             <ListView
                 android:id="@+id/InputlistView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/InputAdd"
+                android:layout_alignParentRight="true" >
+
             </ListView>
 
             <Button
@@ -53,9 +56,12 @@
             > <!--  android:layout_toRightOf="@+id/FISRL" >-->
             
 			<ListView
-                android:id="@+id/OutputlistView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+			    android:id="@+id/OutputlistView"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_above="@+id/OutputAdd"
+			    android:layout_alignParentRight="true" >
+
             </ListView>
             
             <Button
@@ -106,6 +112,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstRL" >
+        <ListView
+			    android:id="@+id/MethodlistView"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_below="@+id/FirstRL"
+			    android:layout_alignParentStart="true" >
+
+            </ListView>
     </RelativeLayout>
     
 
