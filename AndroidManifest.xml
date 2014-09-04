@@ -28,6 +28,10 @@
             android:name=".FIS_Editor"
             android:label="@string/title_activity_fis__editor" >
         </activity>
+        <activity
+            android:name=".VariableDetailActivity"
+            android:label="@string/title_activity_variable_detail" >
+        </activity>
     </application>
 
 </manifest>

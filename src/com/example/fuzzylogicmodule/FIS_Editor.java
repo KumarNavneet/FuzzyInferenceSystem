@@ -1,10 +1,14 @@
 
 package com.example.fuzzylogicmodule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +24,8 @@ import android.widget.Toast;
 import com.example.fuzzylogicmodule.Model.FIS_System;
 import com.example.fuzzylogicmodule.Model.Variable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FIS_Editor extends Activity {
-
+	Context mContext = null;
     Button next = null;
     Button back =null;
     Button InputAdd = null;
@@ -42,6 +44,7 @@ public class FIS_Editor extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fis__editor_gyani);
+        mContext = this;
         next = (Button)findViewById(R.id.Next_FISEditor);
         //back = (Button)findViewById(R.id.Back_FISEditor);
         InputAdd = (Button)findViewById(R.id.InputAdd);
@@ -87,8 +90,38 @@ public class FIS_Editor extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				final Dialog dialog = new Dialog(mContext);
+				dialog.setContentView(R.layout.activity_variable_detail);
+				dialog.setTitle("Variable Details");
+				TextView name = (TextView) dialog.findViewById(R.id.name);
+				name.setText("Name : ");
+				TextView range = (TextView) dialog.findViewById(R.id.range);
+				range.setText("Range : ");
+				TextView type = (TextView) dialog.findViewById(R.id.type);
+				type.setText("Type : ");
+				EditText typeVal = (EditText) dialog.findViewById(R.id.var_detail_type);
+				typeVal.setText("Input");
+				typeVal.setFocusable(false);
+				EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
+				nameVal.setText(Inputs.get(position).getVariableName());
+				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+				// if button is clicked, close the custom dialog
+				OkButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				Button CancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+				// if button is clicked, close the custom dialog
+				CancelButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
 				
-				
+				dialog.show();
 			}
 		});
         OutputListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,7 +130,38 @@ public class FIS_Editor extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				final Dialog dialog = new Dialog(mContext);
+				dialog.setContentView(R.layout.activity_variable_detail);
+				dialog.setTitle("Variable Details");
+				TextView name = (TextView) dialog.findViewById(R.id.name);
+				name.setText("Name : ");
+				TextView range = (TextView) dialog.findViewById(R.id.range);
+				range.setText("Range : ");
+				TextView type = (TextView) dialog.findViewById(R.id.type);
+				type.setText("Type : ");
+				EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
+				nameVal.setText(Outputs.get(position).getVariableName());
+				EditText typeVal = (EditText) dialog.findViewById(R.id.var_detail_type);
+				typeVal.setText("Output");
+				typeVal.setFocusable(false);
+				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+				// if button is clicked, close the custom dialog
+				OkButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				Button CancelButton = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+				// if button is clicked, close the custom dialog
+				CancelButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
 				
+				dialog.show();
 				
 			}
 		});
@@ -158,9 +222,10 @@ public class FIS_Editor extends Activity {
         //back.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         
         MethodlistView = (ListView)findViewById(R.id.MethodlistView);
-        methodValueTexts = new String[] {"And", "Or", "Aggregate", "Implication", "DefuzzyFication"};
+        methodValueTexts = new String[] {"And", "Or", "Aggregate", "Implication", "Defuzzyfication"};
         MethodRowAdapter mMethodAdapter = new MethodRowAdapter(getApplicationContext(), methodValueTexts);
         MethodlistView.setAdapter(mMethodAdapter);
+        MethodlistView.setBackgroundColor(Color.GRAY);
     }    
 
     @Override
