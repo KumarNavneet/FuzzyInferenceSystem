@@ -40,11 +40,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int logo=0x7f020001;
-        public static final int minus=0x7f020002;
-        public static final int plus=0x7f020003;
-        public static final int splash=0x7f020004;
+        public static final int back=0x7f020000;
+        public static final int back_one=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int logo=0x7f020003;
+        public static final int minus=0x7f020004;
+        public static final int next=0x7f020005;
+        public static final int ok=0x7f020006;
+        public static final int plus=0x7f020007;
+        public static final int splash=0x7f020008;
     }
     public static final class id {
         public static final int AddInput=0x7f0a0005;
@@ -54,13 +58,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int DelOutput=0x7f0a0008;
         public static final int FIS=0x7f0a0014;
         public static final int FISRL=0x7f0a0013;
-        public static final int FirstRL=0x7f0a0017;
+        public static final int FIS_Editor_back=0x7f0a0017;
+        public static final int FIS_Editor_next=0x7f0a0018;
         public static final int InputAdd=0x7f0a000d;
         public static final int InputDel=0x7f0a000e;
         public static final int InputRL=0x7f0a000b;
         public static final int InputlistView=0x7f0a000c;
-        public static final int MethodRowSpinner=0x7f0a0027;
-        public static final int MethodRowText=0x7f0a0026;
+        public static final int MethodRowSpinner=0x7f0a0028;
+        public static final int MethodRowText=0x7f0a0027;
         public static final int MethodlistView=0x7f0a0016;
         public static final int MethodsRL=0x7f0a0015;
         public static final int Next_FISEditor=0x7f0a0000;
@@ -69,30 +74,33 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int OutputDel=0x7f0a0012;
         public static final int OutputRL=0x7f0a000f;
         public static final int OutputlistView=0x7f0a0010;
-        public static final int Sample=0x7f0a0024;
-        public static final int action_settings=0x7f0a002d;
+        public static final int Sample=0x7f0a0025;
+        public static final int action_settings=0x7f0a0031;
         public static final int dialogButtonCancel=0x7f0a0023;
-        public static final int dialogButtonOK=0x7f0a001f;
-        public static final int editText1=0x7f0a0029;
-        public static final int editText2=0x7f0a002b;
+        public static final int dialogButtonOK=0x7f0a0020;
+        public static final int editText1=0x7f0a002e;
+        public static final int editText2=0x7f0a0030;
         public static final int firstRL=0x7f0a000a;
-        public static final int fullscreen_content_controls=0x7f0a0019;
-        public static final int hyphen=0x7f0a001e;
-        public static final int name=0x7f0a001a;
+        public static final int fullscreen_content_controls=0x7f0a001a;
+        public static final int graphFrame=0x7f0a002c;
+        public static final int hyphen=0x7f0a001f;
+        public static final int membershipSpinner=0x7f0a002a;
+        public static final int name=0x7f0a001c;
         public static final int parent_relative_layout=0x7f0a0009;
         public static final int range=0x7f0a001b;
-        public static final int sample=0x7f0a0025;
+        public static final int sample=0x7f0a0026;
         public static final int scrollView1=0x7f0a0003;
         public static final int scrollView2=0x7f0a0004;
-        public static final int splashView=0x7f0a0018;
-        public static final int textView1=0x7f0a0028;
-        public static final int textView2=0x7f0a002a;
-        public static final int textView3=0x7f0a002c;
-        public static final int type=0x7f0a0022;
-        public static final int var_detail_lr=0x7f0a001d;
-        public static final int var_detail_name=0x7f0a001c;
-        public static final int var_detail_type=0x7f0a0021;
-        public static final int var_detail_ur=0x7f0a0020;
+        public static final int splashView=0x7f0a0019;
+        public static final int textView1=0x7f0a002d;
+        public static final int textView2=0x7f0a002f;
+        public static final int textView3=0x7f0a002b;
+        public static final int textView6=0x7f0a0029;
+        public static final int type=0x7f0a0024;
+        public static final int var_detail_lr=0x7f0a001e;
+        public static final int var_detail_name=0x7f0a001d;
+        public static final int var_detail_type=0x7f0a0022;
+        public static final int var_detail_ur=0x7f0a0021;
     }
     public static final class layout {
         public static final int activity_fis__editor=0x7f030000;
@@ -101,7 +109,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_variable_detail=0x7f030003;
         public static final int listviewelement=0x7f030004;
         public static final int method_layout_row=0x7f030005;
-        public static final int variable_details_layout=0x7f030006;
+        public static final int test_var_layout=0x7f030006;
+        public static final int variable_details_layout=0x7f030007;
     }
     public static final class menu {
         public static final int fis__editor=0x7f090000;

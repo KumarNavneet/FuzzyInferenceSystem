@@ -17,12 +17,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fuzzylogicmodule.Model.FIS_System;
 import com.example.fuzzylogicmodule.Model.Variable;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
 
 public class FIS_Editor extends Activity {
 	Context mContext = null;
@@ -88,10 +95,10 @@ public class FIS_Editor extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+					final int position, long id) {
 				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(mContext);
-				dialog.setContentView(R.layout.activity_variable_detail);
+				dialog.setContentView(R.layout.test_var_layout);
 				dialog.setTitle("Variable Details");
 				TextView name = (TextView) dialog.findViewById(R.id.name);
 				name.setText("Name : ");
@@ -99,16 +106,46 @@ public class FIS_Editor extends Activity {
 				range.setText("Range : ");
 				TextView type = (TextView) dialog.findViewById(R.id.type);
 				type.setText("Type : ");
-				EditText typeVal = (EditText) dialog.findViewById(R.id.var_detail_type);
+				TextView typeVal = (TextView) dialog.findViewById(R.id.var_detail_type);
 				typeVal.setText("Input");
 				typeVal.setFocusable(false);
-				EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
+				final EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
 				nameVal.setText(Inputs.get(position).getVariableName());
+				final EditText rangell_val = (EditText) dialog.findViewById(R.id.var_detail_lr);
+				final EditText rangeul_val = (EditText) dialog.findViewById(R.id.var_detail_ur);
+				rangell_val.setText(Inputs.get(position).getLowerLimit()+"");
+				rangeul_val.setText(Inputs.get(position).getUpperLimit()+"");
+				Spinner memFuncSpinner = (Spinner)dialog.findViewById(R.id.membershipSpinner);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"MemFunc1", "MemFunc2", "MemFunc3"});
+				// Specify the layout to use when the list of choices appears
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				// Apply the adapter to the spinner
+				memFuncSpinner.setAdapter(adapter);
+				// init example series data
+				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
+				    new GraphViewData(Inputs.get(position).getLowerLimit(), 0.0d)
+				    , new GraphViewData((Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0, 1.0d)
+				    , new GraphViewData(Inputs.get(position).getUpperLimit(), 0.0d)
+				    //, new GraphViewData(4, 1.0d)
+				});
+				 
+				GraphView graphView = new LineGraphView(mContext, "Demo");
+				graphView.addSeries(exampleSeries); // data
+				graphView.setScalable(true);
+				graphView.setScrollable(true);
+				FrameLayout layout = (FrameLayout) dialog.findViewById(R.id.graphFrame);
+				layout.addView(graphView);
 				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-				// if button is clicked, close the custom dialog
 				OkButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						String newNameVal = nameVal.getText().toString();
+						Inputs.get(position).setVariableName(newNameVal);
+						Inputs.get(position).setLowerLimit(Integer.parseInt(rangell_val.getText().toString()));
+						Inputs.get(position).setUpperLimit(Integer.parseInt(rangeul_val.getText().toString()));
+						InputButtons.remove(position);
+						InputButtons.add(position, newNameVal);
+						inputListAdapter.notifyDataSetChanged();
 						dialog.dismiss();
 					}
 				});
@@ -128,10 +165,10 @@ public class FIS_Editor extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+					final int position, long id) {
 				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(mContext);
-				dialog.setContentView(R.layout.activity_variable_detail);
+				dialog.setContentView(R.layout.test_var_layout);
 				dialog.setTitle("Variable Details");
 				TextView name = (TextView) dialog.findViewById(R.id.name);
 				name.setText("Name : ");
@@ -139,16 +176,33 @@ public class FIS_Editor extends Activity {
 				range.setText("Range : ");
 				TextView type = (TextView) dialog.findViewById(R.id.type);
 				type.setText("Type : ");
-				EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
+				final EditText nameVal = (EditText) dialog.findViewById(R.id.var_detail_name);
 				nameVal.setText(Outputs.get(position).getVariableName());
-				EditText typeVal = (EditText) dialog.findViewById(R.id.var_detail_type);
+				TextView typeVal = (TextView) dialog.findViewById(R.id.var_detail_type);
 				typeVal.setText("Output");
 				typeVal.setFocusable(false);
+				final EditText rangell_val = (EditText) dialog.findViewById(R.id.var_detail_lr);
+				final EditText rangeul_val = (EditText) dialog.findViewById(R.id.var_detail_ur);
+				rangell_val.setText(Outputs.get(position).getLowerLimit()+"");
+				rangeul_val.setText(Outputs.get(position).getUpperLimit()+"");
+				Spinner memFuncSpinner = (Spinner)dialog.findViewById(R.id.membershipSpinner);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"MemFunc1", "MemFunc2", "MemFunc3"});
+				// Specify the layout to use when the list of choices appears
+				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				// Apply the adapter to the spinner
+				memFuncSpinner.setAdapter(adapter);
 				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 				// if button is clicked, close the custom dialog
 				OkButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						String newNameVal = nameVal.getText().toString();
+						Outputs.get(position).setVariableName(newNameVal);
+						Outputs.get(position).setLowerLimit(Integer.parseInt(rangell_val.getText().toString()));
+						Outputs.get(position).setUpperLimit(Integer.parseInt(rangeul_val.getText().toString()));
+						OutputButtons.remove(position);
+						OutputButtons.add(position, newNameVal);
+						outputListAdapter.notifyDataSetChanged();
 						dialog.dismiss();
 					}
 				});

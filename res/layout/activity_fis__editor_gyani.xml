@@ -3,6 +3,7 @@
     android:id="@+id/parent_relative_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back_one"
     tools:context="com.example.fuzzylogic_module.FIS_Editor" >
 
     <RelativeLayout
@@ -14,8 +15,7 @@
             android:id="@+id/InputRL"
             android:layout_width="100dp"
             android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
+            android:layout_alignParentLeft="true" >
 
             <ListView
                 android:id="@+id/InputlistView"
@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/InputAdd"
                 android:layout_alignParentRight="true" >
-
             </ListView>
 
             <Button
@@ -51,19 +50,18 @@
             android:id="@+id/OutputRL"
             android:layout_width="100dp"
             android:layout_height="200dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            > <!--  android:layout_toRightOf="@+id/FISRL" >-->
-            
-			<ListView
-			    android:id="@+id/OutputlistView"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:layout_above="@+id/OutputAdd"
-			    android:layout_alignParentRight="true" >
+            android:layout_alignParentRight="true" >
 
+            <!-- android:layout_toRightOf="@+id/FISRL" > -->
+
+            <ListView
+                android:id="@+id/OutputlistView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/OutputAdd"
+                android:layout_alignParentRight="true" >
             </ListView>
-            
+
             <Button
                 android:id="@+id/OutputAdd"
                 style="?android:attr/buttonStyleSmall"
@@ -84,15 +82,15 @@
                 android:background="@drawable/minus"
                 android:text="" />
         </RelativeLayout>
-        
+
         <RelativeLayout
             android:id="@+id/FISRL"
             android:layout_width="100dp"
             android:layout_height="200dp"
             android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:layout_toLeftOf="@+id/OutputRL"
-            android:layout_toRightOf="@+id/InputRL"
-            android:layout_gravity="center_vertical|center_horizontal" >
+            android:layout_toRightOf="@+id/InputRL" >
 
             <Button
                 android:id="@+id/FIS"
@@ -102,9 +100,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:text="FIS" />
-
         </RelativeLayout>
-        
     </RelativeLayout>
 
     <RelativeLayout
@@ -112,15 +108,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstRL" >
-        <ListView
-			    android:id="@+id/MethodlistView"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:layout_below="@+id/FirstRL"
-			    android:layout_alignParentStart="true" >
 
-            </ListView>
+        <ListView
+            android:id="@+id/MethodlistView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
     </RelativeLayout>
-    
+
+    <Button
+            android:id="@+id/FIS_Editor_back"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/back" />
+
+    <Button
+        android:id="@+id/FIS_Editor_next"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/next" />
 
 </RelativeLayout>
