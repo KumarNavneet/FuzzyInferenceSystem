@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fuzzylogicmodule.Model.FIS_System;
+import com.example.fuzzylogicmodule.Model.MembershipFunction;
 import com.example.fuzzylogicmodule.Model.Variable;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
@@ -58,14 +59,14 @@ public class FIS_Editor extends Activity {
         InputDel = (Button)findViewById(R.id.InputDel);
         OutputAdd = (Button)findViewById(R.id.OutputAdd);
         OutputDel = (Button)findViewById(R.id.OutputDel);
-        //Notif = (TextView)findViewById(R.id.Notif_FISEditor);
-        
+        //Notif = (TextView)findViewById(R.id.Notif_FISEditor);        
         //back.setClickable(false);
         //back.setBackgroundColor(Color.parseColor("#808080"));
-        Variable DefaultInput1 = new Variable("Default Input 1", 1, 0, 1);
-        Variable DefaultInput2 = new Variable("Default Input 2", 1, 0, 1);
-        Variable DefaultOutput1 = new Variable("Default Output 1", 1, 0, 1);
-        Variable DefaultOutput2 = new Variable("Default Output 2", 1, 0, 1);
+        final MembershipFunction sampleMF = new MembershipFunction("Triangular", 3, "0,0,0.5,1,1,0");
+        Variable DefaultInput1 = new Variable("Default Input 1", 1, 0, 1, sampleMF);
+        Variable DefaultInput2 = new Variable("Default Input 2", 1, 0, 1, sampleMF);
+        Variable DefaultOutput1 = new Variable("Default Output 1", 2, 0, 1, sampleMF);
+        Variable DefaultOutput2 = new Variable("Default Output 2", 2, 0, 1, sampleMF);
         Inputs = new ArrayList<Variable>();
         Inputs.add(DefaultInput1);
         Inputs.add(DefaultInput2);
@@ -94,12 +95,11 @@ public class FIS_Editor extends Activity {
         InputListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
 				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(mContext);
 				dialog.setContentView(R.layout.test_var_layout);
-				dialog.setTitle("Variable Details");
+				dialog.setTitle("Input Variable Details...");
 				TextView name = (TextView) dialog.findViewById(R.id.name);
 				name.setText("Name : ");
 				TextView range = (TextView) dialog.findViewById(R.id.range);
@@ -116,11 +116,14 @@ public class FIS_Editor extends Activity {
 				rangell_val.setText(Inputs.get(position).getLowerLimit()+"");
 				rangeul_val.setText(Inputs.get(position).getUpperLimit()+"");
 				Spinner memFuncSpinner = (Spinner)dialog.findViewById(R.id.membershipSpinner);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"MemFunc1", "MemFunc2", "MemFunc3"});
-				// Specify the layout to use when the list of choices appears
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"Triangular", "Trapezoidal", "Normal"});
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				// Apply the adapter to the spinner
 				memFuncSpinner.setAdapter(adapter);
+//				EditText graphEndPoints = (EditText)dialog.findViewById(R.id.graphEndPoints);
+//				String GraphEndPointText = "Graph End Points ("+Inputs.get(position).getLowerLimit()+","+0.0d+") ("+
+//											(Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0+","+1.0d+") ("+
+//											Inputs.get(position).getUpperLimit()+","+0.0d+")";
+//				graphEndPoints.setText(GraphEndPointText);
 				// init example series data
 				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
 				    new GraphViewData(Inputs.get(position).getLowerLimit(), 0.0d)
@@ -186,11 +189,15 @@ public class FIS_Editor extends Activity {
 				rangell_val.setText(Outputs.get(position).getLowerLimit()+"");
 				rangeul_val.setText(Outputs.get(position).getUpperLimit()+"");
 				Spinner memFuncSpinner = (Spinner)dialog.findViewById(R.id.membershipSpinner);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"MemFunc1", "MemFunc2", "MemFunc3"});
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"----", "Triangular", "Trapezoidal", "Normal"});
 				// Specify the layout to use when the list of choices appears
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				// Apply the adapter to the spinner
 				memFuncSpinner.setAdapter(adapter);
+//				EditText graphEndPoints = (EditText)dialog.findViewById(R.id.graphEndPoints);
+//				String GraphEndPointText = "Graph End Points ("+Inputs.get(position).getLowerLimit()+","+0.0d+") ("+
+//											(Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0+","+1.0d+") ("+
+//											Inputs.get(position).getUpperLimit()+","+0.0d+")";
 				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 				// if button is clicked, close the custom dialog
 				OkButton.setOnClickListener(new OnClickListener() {
@@ -225,7 +232,7 @@ public class FIS_Editor extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Variable TempInput = new Variable("Default Input ", 1, 0, 1);
+                Variable TempInput = new Variable("Default Input ", 1, 0, 1,sampleMF);
                 Inputs.add(TempInput);
                 InputButtons.add(TempInput.getVariableName());
                 inputListAdapter.notifyDataSetChanged();
@@ -236,7 +243,7 @@ public class FIS_Editor extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Variable TempOutput = new Variable("Default Output ", 1, 0, 1);
+                Variable TempOutput = new Variable("Default Output ", 1, 0, 1,sampleMF);
                 Outputs.add(TempOutput);
                 OutputButtons.add(TempOutput.getVariableName());
                 outputListAdapter.notifyDataSetChanged();

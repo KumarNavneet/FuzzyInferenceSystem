@@ -5,12 +5,20 @@ public class Variable {
 	private int type;
 	private int lowerLimit;
 	private int upperLimit;
-	
-	public Variable(String name, int type, int ll, int ul){
+	private MembershipFunction mMembershipFunc;
+	public Variable(String name, int type, int ll, int ul, MembershipFunction memFunc){
 		this.name = name;
 		this.type = type;
 		this.lowerLimit = ll;
 		this.upperLimit = ul;
+		this.mMembershipFunc = memFunc;
+	}
+	
+	public MembershipFunction getMembershipFunc(){
+		return this.mMembershipFunc;
+	}
+	public void setMembershipFunc(MembershipFunction mf){
+		this.mMembershipFunc = mf;
 	}
 	
 	public String getVariableName(){

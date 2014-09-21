@@ -4,16 +4,6 @@
     android:layout_height="match_parent" 
     android:background="@drawable/back_one">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="49dp"
-        android:text="Name : "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
         android:id="@+id/var_detail_ur"
         android:layout_width="wrap_content"
@@ -52,7 +42,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/type"
         android:layout_marginTop="16dp"
-        android:text="Membership Func."
+        android:text="Select Membership Func."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
  
@@ -63,15 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/var_detail_type"
         android:layout_toRightOf="@+id/var_detail_lr" />
-
-    <Button
-        android:id="@+id/dialogButtonCancel"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/var_detail_type"
-        android:background="@drawable/minus" />
 
     <Button
         android:id="@+id/dialogButtonOK"
@@ -103,16 +84,6 @@
         android:inputType="textPersonName"
          />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/type"
-        android:layout_alignLeft="@+id/membershipSpinner"
-        android:layout_marginLeft="21dp"
-        android:text=" -To- "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
         android:id="@+id/var_detail_lr"
         android:layout_width="100dp"
@@ -137,5 +108,49 @@
         android:layout_alignRight="@+id/textView6"
         android:layout_below="@+id/membershipSpinner"
         android:layout_marginRight="34dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/type"
+        android:layout_alignLeft="@+id/membershipSpinner"
+        android:text=" -To- "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/dialogButtonCancel"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/minus" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/graphFrame"
+        android:layout_alignRight="@+id/type" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/range"
+        android:layout_marginTop="21dp"
+        android:text="Name : "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/mf_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:text="# of MF: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
