@@ -16,16 +16,6 @@
         android:inputType="numberDecimal" />
 
     <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/var_detail_lr"
-        android:layout_marginTop="27dp"
-        android:text="Type : "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/var_detail_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,15 +34,6 @@
         android:layout_marginTop="16dp"
         android:text="Select Membership Func."
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
- 
-
-    <Spinner
-        android:id="@+id/membershipSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/var_detail_type"
-        android:layout_toRightOf="@+id/var_detail_lr" />
 
     <Button
         android:id="@+id/dialogButtonOK"
@@ -109,15 +90,6 @@
         android:layout_below="@+id/membershipSpinner"
         android:layout_marginRight="34dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/type"
-        android:layout_alignLeft="@+id/membershipSpinner"
-        android:text=" -To- "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <Button
         android:id="@+id/dialogButtonCancel"
         style="?android:attr/buttonStyleSmall"
@@ -132,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/graphFrame"
         android:layout_alignRight="@+id/type" >
+
     </LinearLayout>
 
     <TextView
@@ -148,9 +121,43 @@
         android:id="@+id/mf_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView6"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/type"
         android:text="# of MF: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/range"
+        android:layout_marginTop="14dp"
+        android:text="Type : "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/mf_count_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView6"
+        android:layout_below="@+id/var_detail_type"
+        android:layout_toRightOf="@+id/mf_count" />
+
+    <Spinner
+        android:id="@+id/membershipSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/var_detail_type"
+        android:layout_below="@+id/mf_count" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/type"
+        android:layout_toRightOf="@+id/var_detail_lr"
+        android:text=" -To- "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

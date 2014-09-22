@@ -98,7 +98,8 @@ public class FIS_Editor extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
 				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(mContext);
-				dialog.setContentView(R.layout.test_var_layout);
+				//dialog.setContentView(R.layout.test_var_layout);
+				dialog.setContentView(R.layout.variable_details_layout);
 				dialog.setTitle("Input Variable Details...");
 				TextView name = (TextView) dialog.findViewById(R.id.name);
 				name.setText("Name : ");
@@ -119,6 +120,10 @@ public class FIS_Editor extends Activity {
 				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"Triangular", "Trapezoidal", "Normal"});
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				memFuncSpinner.setAdapter(adapter);
+				Spinner memFuncSpinnerCount = (Spinner)dialog.findViewById(R.id.mf_count_spinner);
+                ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"1", "2", "3", "4"});
+                countAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                memFuncSpinner.setAdapter(countAdapter);
 //				EditText graphEndPoints = (EditText)dialog.findViewById(R.id.graphEndPoints);
 //				String GraphEndPointText = "Graph End Points ("+Inputs.get(position).getLowerLimit()+","+0.0d+") ("+
 //											(Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0+","+1.0d+") ("+
