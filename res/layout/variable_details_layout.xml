@@ -26,9 +26,8 @@
         android:ems="10"
         android:inputType="textPersonName" >
 
-        <requestFocus />
+        <!-- <requestfocus /> -->
     </EditText>
->
 
     <TextView
         android:id="@+id/range"
@@ -42,25 +41,35 @@
 
     <EditText
         android:id="@+id/var_detail_lr"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/range"
         android:layout_alignBottom="@+id/range"
-        android:layout_alignLeft="@+id/var_detail_name"
+        android:layout_toRightOf="@+id/range"
         android:ems="10"
         android:inputType="number" >
-    </EditText>
+    </EditText>    
 
     <EditText
         android:id="@+id/var_detail_ur"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/range"
         android:layout_alignBottom="@+id/range"
-        android:layout_alignRight="@+id/var_detail_lr"
+        android:layout_toRightOf="@+id/To"
         android:ems="10"
         android:inputType="number" >
     </EditText>
+    
+    <TextView
+        android:id="@+id/To"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/var_detail_lr"
+        android:layout_below="@+id/var_detail_name"
+        android:layout_marginTop="20dp"
+        android:text="--To--"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/type"
@@ -86,25 +95,15 @@
         android:id="@+id/mf_count_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mf_count"
+        android:layout_below="@+id/var_detail_type"
         android:layout_marginLeft="16dp"
         android:layout_toRightOf="@+id/mf_count" />
-
-    <TextView
-        android:id="@+id/mf_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/mf_count_spinner"
-        android:layout_marginTop="14dp"
-        android:text="Membership Func."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/membershipSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mf_text"
+        android:layout_below="@+id/mf_count_spinner"
         android:layout_marginLeft="23dp"
         android:layout_toRightOf="@+id/mf_text" />
 
@@ -113,13 +112,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/membershipSpinner" >
+        android:layout_below="@+id/membershipSpinner"
+        android:orientation="horizontal" >
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/graphFrame"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="250dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="17dp" >
@@ -151,8 +151,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/var_detail_type"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="20dp"
         android:text="No. of MF to Associate : "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/mf_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/mf_count"
+        android:layout_marginTop="20dp"
+        android:text="Membership Function: "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

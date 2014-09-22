@@ -1,24 +1,35 @@
 package com.example.fuzzylogicmodule.Model;
 
+import java.util.ArrayList;
+
 public class Variable {
 	private String name;
 	private int type;
 	private int lowerLimit;
 	private int upperLimit;
-	private MembershipFunction mMembershipFunc;
-	public Variable(String name, int type, int ll, int ul, MembershipFunction memFunc){
+	private ArrayList<MembershipFunction> mMembershipFuncs;
+	private int mfCount;
+	public Variable(String name, int type, int ll, int ul, ArrayList<MembershipFunction> memFunc, int mfCount){
 		this.name = name;
 		this.type = type;
 		this.lowerLimit = ll;
 		this.upperLimit = ul;
-		this.mMembershipFunc = memFunc;
+		this.mMembershipFuncs = memFunc;
+		this.mfCount = mfCount;
 	}
 	
-	public MembershipFunction getMembershipFunc(){
-		return this.mMembershipFunc;
+	public int getMFCount(){
+		return this.mfCount;
 	}
-	public void setMembershipFunc(MembershipFunction mf){
-		this.mMembershipFunc = mf;
+	public void setMFCount(int mfcount){
+		this.mfCount = mfcount;
+	}
+	
+	public ArrayList<MembershipFunction> getMembershipFuncs(){
+		return this.mMembershipFuncs;
+	}
+	public void setMembershipFunc(ArrayList<MembershipFunction> mf){
+		this.mMembershipFuncs = mf;
 	}
 	
 	public String getVariableName(){

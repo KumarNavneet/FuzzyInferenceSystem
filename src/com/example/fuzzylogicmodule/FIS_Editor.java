@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,8 @@ public class FIS_Editor extends Activity {
     ArrayList<Variable> Inputs = null;
     ArrayList<Variable> Outputs = null;
     String [] methodValueTexts = null;
+    //FrameLayout mframeLayout = null;
+    Dialog dialog = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +62,15 @@ public class FIS_Editor extends Activity {
         InputDel = (Button)findViewById(R.id.InputDel);
         OutputAdd = (Button)findViewById(R.id.OutputAdd);
         OutputDel = (Button)findViewById(R.id.OutputDel);
-        //Notif = (TextView)findViewById(R.id.Notif_FISEditor);        
-        //back.setClickable(false);
-        //back.setBackgroundColor(Color.parseColor("#808080"));
-        final MembershipFunction sampleMF = new MembershipFunction("Triangular", 3, "0,0,0.5,1,1,0");
-        Variable DefaultInput1 = new Variable("Default Input 1", 1, 0, 1, sampleMF);
-        Variable DefaultInput2 = new Variable("Default Input 2", 1, 0, 1, sampleMF);
-        Variable DefaultOutput1 = new Variable("Default Output 1", 2, 0, 1, sampleMF);
-        Variable DefaultOutput2 = new Variable("Default Output 2", 2, 0, 1, sampleMF);
+        dialog = new Dialog(mContext);
+        //mframeLayout = (FrameLayout) dialog.findViewById(R.id.graphFrame);
+        final MembershipFunction sampleMF = new MembershipFunction("Triangular", 6, "0,0,0.5,1,1,0");
+        ArrayList<MembershipFunction> defaultMFList = new ArrayList<MembershipFunction>();
+        defaultMFList.add(sampleMF);
+        Variable DefaultInput1 = new Variable("Default Input 1", 1, 0, 1, defaultMFList, defaultMFList.size());
+        Variable DefaultInput2 = new Variable("Default Input 2", 1, 0, 1, defaultMFList, defaultMFList.size());
+        Variable DefaultOutput1 = new Variable("Default Output 1", 2, 0, 1, defaultMFList, defaultMFList.size());
+        Variable DefaultOutput2 = new Variable("Default Output 2", 2, 0, 1, defaultMFList, defaultMFList.size());
         Inputs = new ArrayList<Variable>();
         Inputs.add(DefaultInput1);
         Inputs.add(DefaultInput2);
@@ -97,7 +101,6 @@ public class FIS_Editor extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
 				// TODO Auto-generated method stub
-				final Dialog dialog = new Dialog(mContext);
 				//dialog.setContentView(R.layout.test_var_layout);
 				dialog.setContentView(R.layout.variable_details_layout);
 				dialog.setTitle("Input Variable Details...");
@@ -123,12 +126,7 @@ public class FIS_Editor extends Activity {
 				Spinner memFuncSpinnerCount = (Spinner)dialog.findViewById(R.id.mf_count_spinner);
                 ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"1", "2", "3", "4"});
                 countAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                memFuncSpinner.setAdapter(countAdapter);
-//				EditText graphEndPoints = (EditText)dialog.findViewById(R.id.graphEndPoints);
-//				String GraphEndPointText = "Graph End Points ("+Inputs.get(position).getLowerLimit()+","+0.0d+") ("+
-//											(Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0+","+1.0d+") ("+
-//											Inputs.get(position).getUpperLimit()+","+0.0d+")";
-//				graphEndPoints.setText(GraphEndPointText);
+                memFuncSpinnerCount.setAdapter(countAdapter);
 				// init example series data
 				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
 				    new GraphViewData(Inputs.get(position).getLowerLimit(), 0.0d)
@@ -141,8 +139,8 @@ public class FIS_Editor extends Activity {
 				graphView.addSeries(exampleSeries); // data
 				graphView.setScalable(true);
 				graphView.setScrollable(true);
-				FrameLayout layout = (FrameLayout) dialog.findViewById(R.id.graphFrame);
-				layout.addView(graphView);
+				FrameLayout mframeLayout = (FrameLayout) dialog.findViewById(R.id.graphFrame);
+				mframeLayout.addView(graphView);
 				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 				OkButton.setOnClickListener(new OnClickListener() {
 					@Override
@@ -169,15 +167,17 @@ public class FIS_Editor extends Activity {
 				dialog.show();
 			}
 		});
+        
+        
         OutputListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int position, long id) {
 				// TODO Auto-generated method stub
-				final Dialog dialog = new Dialog(mContext);
-				dialog.setContentView(R.layout.test_var_layout);
-				dialog.setTitle("Variable Details");
+				//final Dialog dialog = new Dialog(mContext);
+				dialog.setContentView(R.layout.variable_details_layout);
+				dialog.setTitle("Output Variable Details...");
 				TextView name = (TextView) dialog.findViewById(R.id.name);
 				name.setText("Name : ");
 				TextView range = (TextView) dialog.findViewById(R.id.range);
@@ -194,17 +194,95 @@ public class FIS_Editor extends Activity {
 				rangell_val.setText(Outputs.get(position).getLowerLimit()+"");
 				rangeul_val.setText(Outputs.get(position).getUpperLimit()+"");
 				Spinner memFuncSpinner = (Spinner)dialog.findViewById(R.id.membershipSpinner);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"----", "Triangular", "Trapezoidal", "Normal"});
-				// Specify the layout to use when the list of choices appears
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"Triangular", "Trapezoidal", "Normal"});
 				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				// Apply the adapter to the spinner
 				memFuncSpinner.setAdapter(adapter);
-//				EditText graphEndPoints = (EditText)dialog.findViewById(R.id.graphEndPoints);
-//				String GraphEndPointText = "Graph End Points ("+Inputs.get(position).getLowerLimit()+","+0.0d+") ("+
-//											(Inputs.get(position).getLowerLimit() + Inputs.get(position).getUpperLimit())/2.0+","+1.0d+") ("+
-//											Inputs.get(position).getUpperLimit()+","+0.0d+")";
+				final Spinner memFuncSpinnerCount = (Spinner)dialog.findViewById(R.id.mf_count_spinner);
+                ArrayAdapter<String> countAdapter = new ArrayAdapter<String>(mContext,android.R.layout.simple_spinner_item,  new String[]{"1", "2", "3", "4"});
+                countAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                memFuncSpinnerCount.setAdapter(countAdapter);
+                MembershipFunction mMF = Outputs.get(position).getMembershipFuncs().get(0);
+                String paramAsString = "";                
+                for(String s : mMF.getMemfuncParams())
+                	paramAsString+= s+", ";
+                String GraphTitle = mMF.getMemfuncName()+" MF with "+paramAsString+" as end points";
+                GraphData mGraphData = new GraphData(mMF, paramAsString);
+                GraphViewData[] gvd = mGraphData.generate();
+                GraphViewSeries exampleSeries = new GraphViewSeries(gvd);
+                GraphView graphView = new LineGraphView(mContext, GraphTitle);
+				graphView.addSeries(exampleSeries); // data
+				graphView.setScalable(true);
+				graphView.setScrollable(true);
+				final FrameLayout mframeLayout = (FrameLayout) dialog.findViewById(R.id.graphFrame);
+				mframeLayout.addView(graphView);
+				
+				memFuncSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position1, long id) {
+						// TODO Auto-generated method stub
+						//if(position != 0){
+							String mfSelected = parent.getItemAtPosition(position1).toString();
+							if(memFuncSpinnerCount.getSelectedItemPosition() == 0){
+								MembershipFunction existing = Outputs.get(position).getMembershipFuncs().get(0);
+								existing.setMemfuncName(mfSelected);
+								if(mfSelected.equals("Triangular")){
+									existing.setParamCount(3);
+									existing.setMemfuncParams("0,0,.5,1,1,0");
+									String GraphTitle = existing.getMemfuncName()+" MF with 0,0,.5,1,1,0 as end points";
+					                GraphData mGraphData = new GraphData(existing, "0,0,.5,1,1,0");
+					                GraphViewData[] gvd = mGraphData.generate();
+					                GraphViewSeries exampleSeries = new GraphViewSeries(gvd);
+					                GraphView graphView = new LineGraphView(mContext, GraphTitle);
+									graphView.addSeries(exampleSeries); // data
+									graphView.setScalable(true);
+									graphView.setScrollable(true);
+									mframeLayout.removeAllViews();
+									mframeLayout.addView(graphView);
+								}
+								else if(mfSelected.equals("Trapezoidal")){
+									existing.setParamCount(4);
+									existing.setMemfuncParams("0,0,.25,1,.75,1,1,0");
+									String GraphTitle = existing.getMemfuncName()+" MF with 0,0,.25,1,.75,1,1,0 as end points";
+					                GraphData mGraphData = new GraphData(existing, "0,0,.25,1,.75,1,1,0");
+					                GraphViewData[] gvd = mGraphData.generate();
+					                GraphViewSeries exampleSeries = new GraphViewSeries(gvd);
+					                GraphView graphView = new LineGraphView(mContext, GraphTitle);
+									graphView.addSeries(exampleSeries); // data
+									graphView.setScalable(true);
+									graphView.setScrollable(true);
+									mframeLayout.removeAllViews();
+									mframeLayout.addView(graphView);
+								}
+								else if(mfSelected.equals("Normal")){
+									existing.setParamCount(2);
+									existing.setMemfuncParams("0,1");
+									String GraphTitle = existing.getMemfuncName()+" MF with 0, 1 as mew and sigma ";
+					                GraphData mGraphData = new GraphData(existing, "0,1");
+					                GraphViewData[] gvd = mGraphData.generate();
+					                GraphViewSeries exampleSeries = new GraphViewSeries(gvd);
+					                GraphView graphView = new LineGraphView(mContext, GraphTitle);
+									graphView.addSeries(exampleSeries); // data
+									graphView.setScalable(true);
+									graphView.setScrollable(true);
+									//graphView.setsetViewPort(2, 40);
+									mframeLayout.removeAllViews();
+									mframeLayout.addView(graphView);
+								}
+							}
+						//}
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				
 				Button OkButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-				// if button is clicked, close the custom dialog
+
 				OkButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -237,7 +315,10 @@ public class FIS_Editor extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Variable TempInput = new Variable("Default Input ", 1, 0, 1,sampleMF);
+            	final MembershipFunction sampleMF = new MembershipFunction("Triangular", 6, "0,0,0.5,1,1,0");
+                ArrayList<MembershipFunction> defaultMFList = new ArrayList<MembershipFunction>();
+                defaultMFList.add(sampleMF);
+                Variable TempInput = new Variable("Default Input ", 1, 0, 1,defaultMFList, defaultMFList.size());
                 Inputs.add(TempInput);
                 InputButtons.add(TempInput.getVariableName());
                 inputListAdapter.notifyDataSetChanged();
@@ -248,7 +329,10 @@ public class FIS_Editor extends Activity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Variable TempOutput = new Variable("Default Output ", 1, 0, 1,sampleMF);
+            	final MembershipFunction sampleMF = new MembershipFunction("Triangular", 6, "0,0,0.5,1,1,0");
+                ArrayList<MembershipFunction> defaultMFList = new ArrayList<MembershipFunction>();
+                defaultMFList.add(sampleMF);
+                Variable TempOutput = new Variable("Default Output ", 1, 0, 1,defaultMFList, defaultMFList.size());
                 Outputs.add(TempOutput);
                 OutputButtons.add(TempOutput.getVariableName());
                 outputListAdapter.notifyDataSetChanged();

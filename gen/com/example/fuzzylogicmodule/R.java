@@ -75,18 +75,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int OutputRL=0x7f0a000f;
         public static final int OutputlistView=0x7f0a0010;
         public static final int Sample=0x7f0a0025;
-        public static final int action_settings=0x7f0a0031;
+        public static final int To=0x7f0a002f;
+        public static final int action_settings=0x7f0a0032;
         public static final int dialogButtonCancel=0x7f0a0023;
         public static final int dialogButtonOK=0x7f0a0020;
         public static final int firstRL=0x7f0a000a;
         public static final int fullscreen_content_controls=0x7f0a001a;
         public static final int graphFrame=0x7f0a002a;
         public static final int hyphen=0x7f0a001f;
-        public static final int linearLayout1=0x7f0a0030;
+        public static final int linearLayout1=0x7f0a0031;
         public static final int membershipSpinner=0x7f0a002b;
         public static final int mf_count=0x7f0a002c;
         public static final int mf_count_spinner=0x7f0a002d;
-        public static final int mf_text=0x7f0a002f;
+        public static final int mf_text=0x7f0a0030;
         public static final int name=0x7f0a001c;
         public static final int parent_relative_layout=0x7f0a0009;
         public static final int range=0x7f0a001b;
@@ -188,7 +189,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.fuzzylogicmodule:metaButtonBarButtonStyle
+          @attr name android:metaButtonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_metaButtonBarButtonStyle = 1;
         /**
@@ -198,7 +199,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.fuzzylogicmodule:metaButtonBarStyle
+          @attr name android:metaButtonBarStyle
         */
         public static final int ButtonBarContainerTheme_metaButtonBarStyle = 0;
     };
